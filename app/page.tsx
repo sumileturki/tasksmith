@@ -1,18 +1,19 @@
-"use client";
-import  {cn} from "@/lib/utils"
-import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
-const Page =()=> {
-  const trpc = useTRPC();
-  const {data: user} = useQuery(trpc.getUsers.queryOptions())
+import { Button } from '@/components/ui/button'
+import { requireAuth } from '@/lib/auth-utils'
+import { caller } from '@/trpc/server'
+import React from 'react'
+
+const Page = async () => {
+  await requireAuth()
+
+  const data = await caller.getUsers();
   return (
-    <div className="flex text-red-300 min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <div className={cn("text-2xl")}>
-        {JSON.stringify(user)}
-      </div>
-     <p>jnjdj</p>
+    <div>
+      {JSON.stringify(data)}
+  
     </div>
-  );
+  )
+    
 }
 
-export default Page;  
+export default Page
