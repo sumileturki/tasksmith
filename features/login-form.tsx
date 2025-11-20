@@ -18,6 +18,7 @@ import {
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+import { useSocialAuth } from "@/hooks/useSocialAuth";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -28,6 +29,9 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const router = useRouter();
+  const { continueWithGoogle, continueWithGitHub } = useSocialAuth();
+
+
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -68,11 +72,15 @@ export function LoginForm() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
               <div className="flex flex-col gap-4">
-                <Button variant="outline" className="w-full" type="button" disabled={isPending}>
+                <Button variant="outline" className="w-full" type="button" disabled={isPending} onClick={continueWithGitHub}>
+                  <Image src="/github.svg" height={20} width={20} alt="Google"/>
                   Continue with Github
                 </Button>
 
-                <Button variant="outline" className="w-full" type="button" disabled={isPending}>
+                <Button variant="outline" className="w-full" type="button" disabled={isPending}
+                    onClick={continueWithGoogle}
+                    >
+                <Image src="/google.svg" height={20} width={20} alt="Github"/>
                   Continue with Google
                 </Button>
               </div>

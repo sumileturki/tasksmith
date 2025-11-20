@@ -77,10 +77,13 @@ export function SignUpForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
               <div className="flex flex-col gap-4">
                 <Button variant="outline" className="w-full" type="button" disabled={isPending}>
+                <Image src="/github.svg" height={20} width={20} alt="Github"/>
                   Continue with Github
                 </Button>
 
                 <Button variant="outline" className="w-full" type="button" disabled={isPending}>
+                  <Image src="/google.svg" height={20} width={20} alt="Github"/>
+                  
                   Continue with Google
                 </Button>
               </div>

@@ -1,10 +1,14 @@
-import { LoginForm } from '@/features/login-form'
-import React from 'react'
+import { LoginForm } from "@/features/login-form";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const Page = () => {
   return (
-    <LoginForm/>
-  )
-}
+    
+        <LoginForm />
+     
+  );
+};
 
-export default Page
+export default Page;
